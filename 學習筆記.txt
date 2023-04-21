@@ -1,0 +1,98 @@
+# 筆記
+
+https://start.spring.io/		#快速建立專案檔
+Lombok、Web、H2、JPA
+
+
+spring Initializr: Create a Maven Project # vscode建立專案檔
+
+Dependencies 選擇三個：Spring Boot DevTools、Lombok、Spring Web
+
+
+http://127.0.0.1:8080/         # 預設index.html
+
+
+http://127.0.0.1:8080/api/swagger-ui.html
+
+# resources資料夾說明
+static:存放著像是Javascript,css,image等資源
+templates:Spring Boot不推薦使用傳統.jsp,他會搭配著一些模板引擎在建構我們的頁面,ex:Thymeleaf ,freemarker
+application.properties:存放著我們的Spring Boot的參數配置 ,ex:tomcat的port,資料庫連線資訊
+
+server.port=8086  # application.properties改port 
+
+
+# 解決mavan的dependency之javax
+
+1.改版重點https://stackoverflow.com/questions/71179660/spring-boot-3-jakarta-and-javax     
+2.詳細修改內容https://stackoverflow.com/questions/75337506/beancreationexception-error-creating-repository-with-spring-boot-not-a-manage
+3.改用jakarta
+4.{javax.persistence
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;}
+------------->
+import jakarta.persistence.*;
+5. 依賴設定
+<dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.1.5.Final</version>
+        </dependency>
+
+
+# 解決mavan的dependency連mysql
+https://www.javaguides.net/2019/11/mysql-connector-java-maven-dependency.html    
+
+參考資料 1.https://spring.io/guides/gs/spring-boot/    #官方 
+	  2.https://jovepater.com/article/category/series/java-spring-boot-restfulapi/		#Java Spring Boot開發Restful API
+	  3. https://ithelp.ithome.com.tw/users/20107812/ironman/1538     #30天學習Spring MVC 系列
+
+
+
+建立簡單spring thymeleaf web順序
+
+1. 建立controller的Java檔 & class
+
+2. 確認有無thymleaf
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-thymeleaf</artifactId>
+</dependency>
+
+3.可在templates建立Thymeleaf的.html
+
+4.建立MariaDB資料庫
+ 
+5.建立controler、model、dao、service的java檔
+
+controler : 負責外界(ex:網頁)與service的溝通
+
+service : 使用應用程式的功能都寫在於此，除了curd的功能函數之外，驗證碼或郵件處理功能都在此
+
+dao : 主要與資料庫溝通的橋樑，基本上處理有關curd的細部功能撰寫，所以可能需要寫有關SQL語法
+
+6.建立ORM
+ORM(Object-Relational Mapping)的技術就誕生了,ORM利用了Model數據層與數據訪問層做了關聯。
+
+Spring Data JPA優點
+可以配置多個DataSource來源
+多個資料表查詢
+可自訂SQL查詢
+擁有分頁與排序的功能
+
+
+
+
+
+	
+
